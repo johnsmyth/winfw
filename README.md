@@ -75,6 +75,7 @@ end
 
 firewall_rule attributes are as follows:
 
+```
 -action      -  :create, :delete (default is  :create)
 -name        - firewall rule name to create or delete.  You can use a name of 'all' in a delete to delete all rules that match other criteria
 -description - firewall rule description
@@ -89,7 +90,7 @@ firewall_rule attributes are as follows:
 -program     - the path to the program
 -service     - the short name of the service, or 'any'
 -interface_type - { any | wireless | lan | ras } ]
-
+```
 
 # Recipes
 
