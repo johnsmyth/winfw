@@ -75,20 +75,20 @@ end
 
 firewall_rule attributes are as follows:
 
-*action      -  :create, :delete (default is  :create)
-*name        - firewall rule name to create or delete.  You can use a name of 'all' in a delete to delete all rules that match other criteria
-*description - firewall rule description
-*local_ip    - can be 'any', a specific address, a subnet in CIDR or ip/mask notation, or a range separated by -
-*local_port  - can by 'any', an integer or one of {  rpc | rpc-epmap | iphttps | teredo | [ ,... ] } 
-*remote_ip   - can be 'any', a specific address, a subnet in CIDR or ip/mask notation, or a range separated by -
-*remote_port - can by 'any', an integer or one of {  rpc | rpc-epmap | iphttps | teredo | [ ,... ] } 
-*dir         - { in | out }
-*protocol    - can by 'any', an integer, or one of { | icmpv4 | icmpv6 | icmpv4:type,code | icmpv6:type,code | tcp | udp } 
-*fw_action   - { allow | block | bypass }
-*profile     - { public | private | domain | any | [ ,... ] } ]
-*program     - the path to the program
-*service     - the short name of the service, or 'any'
-*interface_type - { any | wireless | lan | ras } ]
+-action      -  :create, :delete (default is  :create)
+-name        - firewall rule name to create or delete.  You can use a name of 'all' in a delete to delete all rules that match other criteria
+-description - firewall rule description
+-local_ip    - can be 'any', a specific address, a subnet in CIDR or ip/mask notation, or a range separated by -
+-local_port  - can by 'any', an integer or one of {  rpc | rpc-epmap | iphttps | teredo | [ ,... ] } 
+-remote_ip   - can be 'any', a specific address, a subnet in CIDR or ip/mask notation, or a range separated by -
+-remote_port - can by 'any', an integer or one of {  rpc | rpc-epmap | iphttps | teredo | [ ,... ] } 
+-dir         - { in | out }
+-protocol    - can by 'any', an integer, or one of { | icmpv4 | icmpv6 | icmpv4:type,code | icmpv6:type,code | tcp | udp } 
+-fw_action   - { allow | block | bypass }
+-profile     - { public | private | domain | any | [ ,... ] } ]
+-program     - the path to the program
+-service     - the short name of the service, or 'any'
+-interface_type - { any | wireless | lan | ras } ]
 
 
 # Recipes
