@@ -30,8 +30,12 @@ action :delete do
 end
 
 def load_current_resource
-  @current_resource = Chef::Resource::WinfwFirewallRule.new(@new_resource.name)
-  @current_resource.name(@new_resource.name)
+  @current_resource = Chef::Resource::WinfwFirewallRule.new(@new_resource.resource_name)
+  if( @new_resource.name) 
+    @current_resource.name(@new_resource.name)
+  else
+    @current_resource.name(@new_resource.resource_name)
+  end
   @current_resource.description(@new_resource.description)
   @current_resource.fw_action(@new_resource.fw_action)
   @current_resource.local_ip(@new_resource.local_ip)
