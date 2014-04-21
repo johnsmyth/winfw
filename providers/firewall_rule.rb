@@ -83,20 +83,24 @@ def create_firewall_rule( newresource )
 end
 
 def delete_firewall_rule( newresource)
-  cmd_str = "netsh advfirewall firewall delete rule name=\"#{newresource.name}\" " 
-  cmd_str += "dir=\"#{newresource.dir}\" " if newresource.dir
-  cmd_str += "profile=\"#{newresource.profile}\" " if newresource.profile
-  cmd_str += "program=\"#{newresource.program}\" " if newresource.program
-  cmd_str += "service=\"#{newresource.service}\" " if newresource.service
-  cmd_str += "localip=\"#{newresource.local_ip}\" " if newresource.local_ip
-  cmd_str += "localport=\"#{newresource.local_port}\" " if newresource.local_port
-  cmd_str += "remoteip=\"#{newresource.remote_ip}\" " if newresource.remote_ip
-  cmd_str += "remoteport=\"#{newresource.remote_port}\" " if newresource.remote_port
-  cmd_str += "protocol=\"#{newresource.protocol}\" " if newresource.protocol
+  if rule_exists?( newresource) 
+    cmd_str = "netsh advfirewall firewall delete rule name=\"#{newresource.name}\" " 
+    cmd_str += "dir=\"#{newresource.dir}\" " if newresource.dir
+    cmd_str += "profile=\"#{newresource.profile}\" " if newresource.profile
+    cmd_str += "program=\"#{newresource.program}\" " if newresource.program
+    cmd_str += "service=\"#{newresource.service}\" " if newresource.service
+    cmd_str += "localip=\"#{newresource.local_ip}\" " if newresource.local_ip
+    cmd_str += "localport=\"#{newresource.local_port}\" " if newresource.local_port
+    cmd_str += "remoteip=\"#{newresource.remote_ip}\" " if newresource.remote_ip
+    cmd_str += "remoteport=\"#{newresource.remote_port}\" " if newresource.remote_port
+    cmd_str += "protocol=\"#{newresource.protocol}\" " if newresource.protocol
 
-  Chef::Log.debug "Removing firewall rule with command: #{cmd_str}"
-  execute "netsh advfirewall" do
-    command cmd_str
+    Chef::Log.debug "Removing firewall rule with command: #{cmd_str}"
+    execute "netsh advfirewall" do
+      command cmd_str
+    end
+  else
+    Chef::Log.info "Firewall rule doesnt exist: #{newresource.name} -- Skipping delete..."
   end
 end
 
