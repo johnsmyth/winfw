@@ -42,7 +42,9 @@ Vagrant.configure("2") do |config|
         }
       }
       chef.run_list = [
-          "recipe[winfw::add_rule]",
+#          "recipe[winfw::add_rule]",
+          "recipe[winfw::delete_rule]",
+          "recipe[winfw::delete_rule]",
           "recipe[winfw::delete_rule]",
           #"recipe[minitest-handler::default]"
       ]
