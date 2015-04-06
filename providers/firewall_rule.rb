@@ -9,11 +9,9 @@ use_inline_resources
 
 action :create do
   if @current_resource.exists
-    Chef::Log.info "#{ @new_resource } already exists - nothing to do."
+    Chef::Log.debug "#{ @new_resource } already exists - nothing to do."
   else
-    Chef::Log.info "In Create"
-    converge_by("Create #{ @new_resource }") do
-      Chef::Log.info "calling create_firewall_rule"
+    converge_by("Create firewall rule #{ @new_resource }") do
       create_firewall_rule( @new_resource )
     end
   end
@@ -21,11 +19,11 @@ end
 
 action :delete do
   if @current_resource.exists
-    converge_by("Delete #{ @new_resource }") do
+    converge_by("Delete firewall rule #{ @new_resource }") do
       delete_firewall_rule ( @new_resource)
     end
   else
-    Chef::Log.info "#{ @current_resource } doesn't exist - can't delete."
+    Chef::Log.debug "#{ @current_resource } doesn't exist - can't delete."
   end
 end
 
@@ -58,7 +56,7 @@ private
 
 def create_firewall_rule( newresource )
   if rule_exists?( newresource) 
-    Chef::Log.info "Firewall rule exists: #{newresource.name} -- Skipping create..."
+    Chef::Log.debug "Firewall rule exists: #{newresource.name} -- Skipping create..."
   
   else
      cmd_str = "netsh advfirewall firewall add rule name=\"#{new_resource.name}\" " 
@@ -100,7 +98,7 @@ def delete_firewall_rule( newresource)
       command cmd_str
     end
   else
-    Chef::Log.info "Firewall rule doesnt exist: #{newresource.name} -- Skipping delete..."
+    Chef::Log.debug "Firewall rule doesnt exist: #{newresource.name} -- Skipping delete..."
   end
 end
 
