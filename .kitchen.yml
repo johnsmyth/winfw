@@ -1,16 +1,30 @@
 ---
 driver:
+  forward_agent: yes
   name: vagrant
+  vm_hostname: false # do not bother trying to change the hostname (sometimes fails)
+  customize:
+    cpus: 2
+    memory: 4096
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
 
 platforms:
-  - name: ubuntu-12.04
-  - name: centos-6.4
+  - name: windows_2012r2
+    driver_config:
+      box: win2012r2-standard-cheflatest
+      box_url: # insert your own URL to box files here  
+      gui: true
+      communicator: winrm
+    transport:
+      name: winrm
+      port: 5985
 
 suites:
   - name: default
     run_list:
-      - recipe[winfw::default]
-    attributes:
+      - recipe[winfw_tester::add_rule]
+      - recipe[winfw_tester::delete_rule]
+        #- recipe[minitest-handler]
+
