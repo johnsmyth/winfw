@@ -1,13 +1,13 @@
 # winfw cookbook
-This cookbook implements an lwrp for windows firewalls. This code has not been fully vetted for production deployment.  Currentlty, there is only a single firewall\_rule resource/provider.
+This cookbook implements an lwrp for windows firewalls.  Currently, there is only a single firewall\_rule resource/provider.
 
 # Requirements
-This cookbook has only been tested on windows 2008R2.  It should work with other versions of windows but I have not tested them.  The firewall\_rule provider is basically a wrapper around netsh advfirewall.
+This cookbook has been tested on windows 2008R2 and windows 2012R2.  It should work with other versions of windows but I have not tested them.  The firewall\_rule provider is basically a wrapper around netsh advfirewall.
 
 # Usage
 In your recipe, you can use the winfw\_firewall\_rule resource.  Currently, the supported actions are :create and :delete.  If the 'name' attribute is not specified, the name of the resource will be used as the rule name.  Attribute defaults match the netsh advfirewall defaults.
 
-Note that using a name of 'all' will allow matching on other attributes for rule deletion, but since the name attribute is used to look for existing rules, it would likley not be an idempotent operation.
+Note that using a name of 'all' will allow matching on other attributes for rule deletion, but since the name attribute is used to look for existing rules, it would likely not be an idempotent operation.
 
 
 ##Examples
@@ -97,4 +97,4 @@ firewall_rule attributes are as follows:
 
 # Author
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: John Smyth (jsmyth@10thmagnitude.com)
